@@ -1,0 +1,11 @@
+{
+  "name": "smart-contracts",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "npx hardhat test"
+  },
+  "devDependencies": {
+    "hardhat": "^2.22.0",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0"
+  }
+}

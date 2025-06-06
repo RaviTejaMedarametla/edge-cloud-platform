@@ -1,0 +1,18 @@
+{
+  "name": "mobile-app",
+  "version": "0.1.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios"
+  },
+  "dependencies": {
+    "expo": "^49.0.0",
+    "react": "18.x",
+    "react-native": "0.72.x",
+    "react-redux": "latest",
+    "redux": "latest",
+    "expo-sqlite": "latest"
+  }
+}

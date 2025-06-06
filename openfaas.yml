@@ -1,0 +1,8 @@
+provider:
+  name: openfaas
+  gateway: http://localhost:8080
+functions:
+  hello:
+    lang: python
+    handler: ./functions/hello
+    image: hello-fn:latest

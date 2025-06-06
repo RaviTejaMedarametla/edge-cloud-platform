@@ -1,0 +1,78 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  mqtt:
+    image: eclipse-mosquitto:latest
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+
+  openfaas-gateway:
+    image: openfaas/gateway:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - basic_auth=false
+
+  ganache:
+    image: trufflesuite/ganache-cli:latest
+    restart: always
+    ports:
+      - "8545:8545"
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  order-service:
+    build: ./backend/order-service
+    ports:
+      - "8001:8000"
+    depends_on:
+      - postgres
+
+  payment-service:
+    build: ./backend/payment-service
+    ports:
+      - "8002:8000"
+    depends_on:
+      - postgres
+
+  user-service:
+    build: ./backend/user-service
+    ports:
+      - "8003:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  mongodb_data:
+  postgres_data:

@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Virtual environments
+venv/
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Expo build
+*.expo
+
+# VS Code
+.vscode/
+
+# Jupyter notebooks metadata
+.ipynb_checkpoints/
+
+# Environment variables
+.env

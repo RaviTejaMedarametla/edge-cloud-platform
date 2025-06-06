@@ -1,0 +1,10 @@
+[Unit]
+Description=Object Detection Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/object-detection/detect.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
