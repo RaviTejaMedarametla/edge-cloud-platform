@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "next": "latest",
@@ -15,6 +17,14 @@
   "devDependencies": {
     "tailwindcss": "latest",
     "autoprefixer": "latest",
-    "postcss": "latest"
+    "postcss": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/user-event": "latest",
+    "jest": "latest",
+    "babel-jest": "latest",
+    "jest-environment-jsdom": "latest"
   }
 }

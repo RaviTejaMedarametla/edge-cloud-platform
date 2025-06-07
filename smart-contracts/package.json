@@ -2,10 +2,12 @@
   "name": "smart-contracts",
   "version": "0.1.0",
   "scripts": {
-    "test": "npx hardhat test"
+    "test": "npx hardhat test",
+    "lint": "npx solhint 'contracts/**/*.sol'"
   },
   "devDependencies": {
     "hardhat": "^2.22.0",
-    "@nomicfoundation/hardhat-toolbox": "^3.0.0"
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "solhint": "^3.6.0"
   }
 }
