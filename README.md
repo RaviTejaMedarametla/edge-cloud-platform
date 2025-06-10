@@ -67,6 +67,18 @@ commands from their respective subdirectories such as `frontend`, `mobile` or
 
 The CI workflow resides under `.github/workflows/ci.yml` and runs on each push to `main`.
 
+## Microservices
+
+Three FastAPI services power the backend:
+
+| Service | Port | Description |
+|---------|------|-------------|
+| `user-service` | 8001 | Manages users with `/users` CRUD endpoints |
+| `order-service` | 8000 | Handles orders with `/orders` endpoints |
+| `payment-service` | 8002 | Tracks payments via `/payments` endpoints |
+
+They are lightweight in-memory APIs used for demonstration purposes.
+
 ## Edge Device Object Detection
 
 The edge device script loads a local TorchScript model from `edge-devices/object-detection/model.pt` so it can run offline:
@@ -94,4 +106,7 @@ Run `demo.py` to launch all three backend services and exercise their APIs autom
 python demo.py
 ```
 
-The script spins up the user, order and payment services using Uvicorn, creates a user, an order and a payment via HTTP and then prints the resulting lists before shutting everything down.
+The script spins up the user, order and payment services using Uvicorn.
+It now prompts you to enter a sample user, order and payment on the command line.
+Those values are sent to the running APIs and the resulting lists of resources
+are printed before shutting everything down.
