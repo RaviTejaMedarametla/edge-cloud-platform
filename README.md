@@ -67,6 +67,18 @@ commands from their respective subdirectories such as `frontend`, `mobile` or
 
 The CI workflow resides under `.github/workflows/ci.yml` and runs on each push to `main`.
 
+## Microservices
+
+Three FastAPI services power the backend:
+
+| Service | Port | Description |
+|---------|------|-------------|
+| `user-service` | 8001 | Manages users with `/users` CRUD endpoints |
+| `order-service` | 8000 | Handles orders with `/orders` endpoints |
+| `payment-service` | 8002 | Tracks payments via `/payments` endpoints |
+
+They are lightweight in-memory APIs used for demonstration purposes.
+
 ## Edge Device Object Detection
 
 The edge device script loads a local TorchScript model from `edge-devices/object-detection/model.pt` so it can run offline:
@@ -88,10 +100,22 @@ A small PyTorch notebook under `notebooks/federated_learning.ipynb` demonstrates
 
 ## Demo
 
-Run `demo.py` to launch all three backend services and exercise their APIs automatically:
+Run `demo.py` to launch all three backend services and exercise their APIs interactively.
+Make sure the Python requirements for each service are installed first:
+
+```bash
+pip install -r backend/user-service/requirements.txt \
+            -r backend/order-service/requirements.txt \
+            -r backend/payment-service/requirements.txt
+```
+
+Then start the demo with:
 
 ```bash
 python demo.py
 ```
 
-The script spins up the user, order and payment services using Uvicorn, creates a user, an order and a payment via HTTP and then prints the resulting lists before shutting everything down.
+You will be prompted for the user, order and payment details. After
+each entry the current data for all three services is displayed.
+Press `y` when asked to add another entry or any other key to exit.
+At the end a short summary of how many records were created is shown.
