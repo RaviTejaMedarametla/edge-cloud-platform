@@ -107,6 +107,6 @@ python demo.py
 ```
 
 The script spins up the user, order and payment services using Uvicorn.
-It now prompts you to enter a sample user, order and payment on the command line.
-Those values are sent to the running APIs and the resulting lists of resources
-are printed before shutting everything down.
+It now prompts you to enter a user, order and payment interactively.
+After each set is created the current lists of resources are shown.
+You can add as many entries as you like before stopping the demo.
