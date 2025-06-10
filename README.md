@@ -38,14 +38,14 @@ setup.sh               # Setup script
 3. **Frontend**
    ```bash
    cd frontend
-   yarn install
+   yarn install  # or npm install
    yarn dev
    ```
 
 4. **Mobile**
    ```bash
    cd mobile
-   yarn install
+   yarn install  # or npm install
    expo start
    ```
 
@@ -60,6 +60,10 @@ setup.sh               # Setup script
    ```bash
    faas-cli deploy -f openfaas.yml
    ```
+
+Note: The repository does not contain a top-level `package.json`. Run npm or yarn
+commands from their respective subdirectories such as `frontend`, `mobile` or
+`smart-contracts`.
 
 The CI workflow resides under `.github/workflows/ci.yml` and runs on each push to `main`.
 
@@ -76,3 +80,18 @@ Use a webcam to run detection and press `q` to quit.
 ## Terraform
 
 Infrastructure modules live under `infrastructure/terraform` and can be applied using standard Terraform commands after configuring your cloud provider credentials.
+
+
+## Federated Learning Example
+
+A small PyTorch notebook under `notebooks/federated_learning.ipynb` demonstrates a simple federated averaging loop with two clients. Each round trains locally on synthetic data and then averages the model weights.
+
+## Demo
+
+Run `demo.py` to launch all three backend services and exercise their APIs automatically:
+
+```bash
+python demo.py
+```
+
+The script spins up the user, order and payment services using Uvicorn, creates a user, an order and a payment via HTTP and then prints the resulting lists before shutting everything down.
