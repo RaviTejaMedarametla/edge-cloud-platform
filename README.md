@@ -100,13 +100,22 @@ A small PyTorch notebook under `notebooks/federated_learning.ipynb` demonstrates
 
 ## Demo
 
-Run `demo.py` to launch all three backend services and exercise their APIs automatically:
+Run `demo.py` to launch all three backend services and exercise their APIs interactively.
+Make sure the Python requirements for each service are installed first:
+
+```bash
+pip install -r backend/user-service/requirements.txt \
+            -r backend/order-service/requirements.txt \
+            -r backend/payment-service/requirements.txt
+```
+
+Then start the demo with:
 
 ```bash
 python demo.py
 ```
 
-The script spins up the user, order and payment services using Uvicorn.
-It now prompts you to enter a user, order and payment interactively.
-After each set is created the current lists of resources are shown.
-You can add as many entries as you like before stopping the demo.
+You will be prompted for the user, order and payment details. After
+each entry the current data for all three services is displayed.
+Press `y` when asked to add another entry or any other key to exit.
+At the end a short summary of how many records were created is shown.

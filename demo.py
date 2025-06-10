@@ -2,6 +2,7 @@
 import subprocess
 import time
 import httpx
+from textwrap import dedent
 
 
 def prompt_user():
@@ -33,12 +34,27 @@ def prompt_payment(order_id, amount):
         "status": "completed",
     }
 
+
 SERVICES = [
     ("backend.order-service.main:app", 8000),
     ("backend.user-service.main:app", 8001),
     ("backend.payment-service.main:app", 8002),
 ]
 
+
+def show_endpoints():
+    print(
+        dedent(
+            """
+            Available API endpoints:
+              Users   -> http://localhost:8001/users
+              Orders  -> http://localhost:8000/orders
+              Payments-> http://localhost:8002/payments
+            """
+        )
+    )
+
+print("Launching services...\n")
 procs = [
     subprocess.Popen(
         ["uvicorn", module, "--port", str(port)],
@@ -47,20 +63,30 @@ procs = [
     )
     for module, port in SERVICES
 ]
-
 time.sleep(2)
+show_endpoints()
 
 client = httpx.Client()
+users = []
+orders = []
+payments = []
+
 try:
     while True:
         user = prompt_user()
-        print("Creating user:", client.post("http://localhost:8001/users", json=user).json())
+        resp = client.post("http://localhost:8001/users", json=user).json()
+        users.append(resp)
+        print("Creating user:", resp)
 
         order = prompt_order()
-        print("Creating order:", client.post("http://localhost:8000/orders", json=order).json())
+        resp = client.post("http://localhost:8000/orders", json=order).json()
+        orders.append(resp)
+        print("Creating order:", resp)
 
         payment = prompt_payment(order["id"], order["price"] * order["quantity"])
-        print("Creating payment:", client.post("http://localhost:8002/payments", json=payment).json())
+        resp = client.post("http://localhost:8002/payments", json=payment).json()
+        payments.append(resp)
+        print("Creating payment:", resp)
 
         print("\nCurrent users:", client.get("http://localhost:8001/users").json())
         print("Current orders:", client.get("http://localhost:8000/orders").json())
@@ -69,6 +95,7 @@ try:
         if input("\nAdd another set? [y/N]: ").lower() != "y":
             break
 finally:
+    print("\nSummary: {} users, {} orders, {} payments".format(len(users), len(orders), len(payments)))
     for p in procs:
         p.terminate()
     for p in procs:
